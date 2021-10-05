@@ -1,0 +1,140 @@
+
+
+
+
+/*.App {*/
+/*  padding: 30px;*/
+/*  display: flex;*/
+/*}*/
+
+/*.App > div {*/
+/*  margin-right: 50px;*/
+/*}*/
+
+/*.error{*/
+/*  border : red 1px solid*/
+/*}*/
+
+/*.error-message {*/
+/*  color: red*/
+/*}*/
+
+/*.active-filter {*/
+/*  background-color: aquamarine;*/
+/*}*/
+
+.is-done {
+  opacity: 0.5;
+    background: linear-gradient(45deg, #0052ce 30%, #356aff 90%)
+}
+
+
+
+
+
+
+
+
+
+
+/*.inputLevel {*/
+/*  box-shadow: 0px 10px 40px rgba(0,0,0,0.9);*/
+/*  border-radius: 20px;*/
+/*  font-size: 40px;*/
+/*  text-align: center;*/
+/*  margin-top: 30px;*/
+/*  margin-left: 15px;*/
+/*  !*margin: 12px;*!*/
+/*  padding: 5px;*/
+/*  !*border: aqua;*!*/
+/*  background-color: aqua;*/
+/*  height: 60px;*/
+/*  width: 80px;*/
+/*}*/
+
+/*.buttonReset {*/
+/*  border-color: #5fbbb2 #232e34 #18615d;*/
+/*  background: linear-gradient(#7defe2, #0a5593) #3d7abb;*/
+/*  font-size: 15px;*/
+/*  font-weight: bold;*/
+/*  vertical-align: 2px;*/
+/*  box-shadow: 0px 10px 40px rgba(0,0,0,0.9);*/
+/*  border-radius: 8px;*/
+/*  padding: 5px;*/
+/*  margin-left: 20px;*/
+/*  background-color: aqua;*/
+/*  opacity: 0.5*/
+/*}*/
+/*.error {*/
+/*  box-shadow: 0px 20px 40px rgba(0,0,0,0.9);*/
+/*  border-radius: 8px;*/
+/*  font-size: 40px;*/
+/*  text-align: center;*/
+/*  margin-top: 30px;*/
+/*  margin-left: 15px;*/
+/*  padding: 5px;*/
+/*  background: linear-gradient(#7defe2, #0a5593) #3d7abb;*/
+/*  height: 60px;*/
+/*  width: 80px;*/
+/*  color:red;*/
+/*}*/
+/*.buttonInc {*/
+/*  border-color: #5fbbb2 #232e34 #18615d;*/
+/*  background: linear-gradient(#7defe2, #0a5593) #3d7abb;*/
+/*  font-size: 15px;*/
+/*  font-weight: bold;*/
+/*  vertical-align: 2px;*/
+/*  box-shadow: 0px 10px 40px rgba(0,0,0,0.9);*/
+/*  border-radius: 8px;*/
+/*  padding: 5px;*/
+/*  margin-left: 35px;*/
+/*  background-color: aqua;*/
+/*}*/
+/*.errorInc {*/
+/*  border-color: #5fbbb2 #232e34 #18615d;*/
+/*  background: linear-gradient(#7defe2, #0a5593) #3d7abb;*/
+/*  font-size: 15px;*/
+/*  font-weight: bold;*/
+/*  vertical-align: 2px;*/
+/*  box-shadow: 0px 10px 40px rgba(0,0,0,0.9);*/
+/*  border-radius: 8px;*/
+/*  padding: 5px;*/
+/*  margin-left: 35px;*/
+/*  background-color: aqua;*/
+/*  opacity: 0.5*/
+/*}*/
+/*buttonReset {*/
+/*  border-color: #5fbbb2 #232e34 #18615d;*/
+/*  background: linear-gradient(#7defe2, #0a5593) #3d7abb;*/
+/*  font-size: 15px;*/
+/*  font-weight: bold;*/
+/*  vertical-align: 2px;*/
+/*  box-shadow: 0px 10px 40px rgba(0,0,0,0.9);*/
+/*  border-radius: 8px;*/
+/*  padding: 5px;*/
+/*  margin-left: 20px;*/
+/*  background-color: aqua;*/
+/*  opacity: 0.5*/
+/*}*/
+/*.errorRes {*/
+/*  border-color: #5fbbb2 #232e34 #18615d;*/
+/*  background: linear-gradient(#7defe2, #0a5593) #3d7abb;*/
+/*  font-size: 15px;*/
+/*  font-weight: bold;*/
+/*  vertical-align: 2px;*/
+/*  box-shadow: 0px 10px 40px rgba(0,0,0,0.9);*/
+/*  border-radius: 8px;*/
+/*  padding: 5px;*/
+/*  margin-left: 20px;*/
+/*  background-color: aqua;*/
+/*}*/
+/*.HighDiv {*/
+/*  border-radius: 10px;*/
+/*  box-shadow: 0 0px 20px 8px #ff4f00;*/
+/*  text-indent: 30px;*/
+/*  margin: 20px auto;*/
+/*  font-size: 40px;*/
+/*  background-color: #455f5f;*/
+/*  height: 190px;*/
+/*  width: 180px;*/
+/*}*/
