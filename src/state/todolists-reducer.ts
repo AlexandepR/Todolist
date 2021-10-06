@@ -3,20 +3,21 @@ import {v1} from "uuid";
 
 
 export type RemoveTodolistActionType = {
-    type: 'REMOVE-TODOLIST',
+    type: 'REMOVE-TODOLIST'
     id:string
 }
 export type AddTodolistActionType = {
-    type: 'ADD-TODOLIST',
+    type: 'ADD-TODOLIST'
     title:string
+    todolistId: string
 }
 export type ChangeTodolistTitleActionType = {
-    type: 'CHANGE-TODOLIST-TITLE',
+    type: 'CHANGE-TODOLIST-TITLE'
     id: string
     title:string
 }
 export type ChangeTodolistFilterActionType = {
-    type: 'CHANGE-TODOLIST-FILTER',
+    type: 'CHANGE-TODOLIST-FILTER'
     id:string
     filter: FilteredTask
 }
@@ -31,7 +32,7 @@ export const todolistsReducer = ( state: Array<TodoListsType>, action: ActionsTy
 
         }
         case 'ADD-TODOLIST': {
-            return [...state, {id: v1(), title: action.title, filter: 'All'}]
+            return [...state, {id: action.todolistId, title: action.title, filter: 'All'}]
 
         }
         case 'CHANGE-TODOLIST-TITLE': {
@@ -55,19 +56,19 @@ export const todolistsReducer = ( state: Array<TodoListsType>, action: ActionsTy
     }
 }
 
-export const RemoveTodolistAC = (todolistID: string): RemoveTodolistActionType => {
+export const removeTodolistAC = (todolistID: string): RemoveTodolistActionType => {
     return {type: "REMOVE-TODOLIST", id: todolistID}
 }
 
 export const addTodolistAC = (title: string) : AddTodolistActionType => {
-    return {type: 'ADD-TODOLIST', title: title}
+    return {type: 'ADD-TODOLIST', title: title, todolistId: v1()}
 }
 
-export const ChangeTodolistAC = (title: string, id: string): ChangeTodolistTitleActionType => {
+export const changeTodolistAC = (title: string, id: string): ChangeTodolistTitleActionType => {
     return {type: 'CHANGE-TODOLIST-TITLE', title: title, id: id}
 }
 
-export const FilterTodoListAC = (id: string, filter: FilteredTask): ChangeTodolistFilterActionType => {
+export const filterTodoListAC = (id: string, filter: FilteredTask): ChangeTodolistFilterActionType => {
     return { type: 'CHANGE-TODOLIST-FILTER',id: id, filter: filter }
 }
 
