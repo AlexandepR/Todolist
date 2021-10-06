@@ -19,10 +19,13 @@
     "typescript": "~3.7.2",
     "uuid": "^8.3.2"
   },
+  "homepage": "https://AlexandepR.github.io/Todolist",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

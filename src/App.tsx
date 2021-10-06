@@ -24,6 +24,10 @@ export type TodoListsType = {
     filter: FilteredTask
 }
 
+export type TasksStateType = {
+    [key: string]: Array<TasksArr>
+}
+
 function App() {
 
     function addTask(value: string, tlId: string) {
@@ -59,9 +63,7 @@ function App() {
         setTasks({...tasksObj})
     }
 
-    type TasksStateType = {
-        [key: string]: Array<TasksArr>
-    }
+
 
     const todoList1 = v1()
     const todoList2 = v1()
@@ -179,6 +181,18 @@ function App() {
 }
 
 export default App
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //////////////////////////////////////////////  Todolist 8

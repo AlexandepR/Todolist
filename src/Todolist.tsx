@@ -1,5 +1,5 @@
 import React, {ChangeEvent} from "react";
-import {FilteredTask} from "./App";
+import {FilteredTask, TodoListsType} from "./App";
 import './App.css'
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
@@ -111,6 +111,24 @@ export function Todolist(props: TypeProps) {
         </div>
     )
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
