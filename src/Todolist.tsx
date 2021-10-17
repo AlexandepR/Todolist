@@ -5,19 +5,20 @@ import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
 import {Button, Checkbox, IconButton} from "@material-ui/core";
 import {Delete} from "@material-ui/icons";
+import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "./state/tasks-reducer";
+import {useDispatch, useSelector} from "react-redux";
+import {AppRootState} from "./state/store";
+import {TasksStateType} from "./AppWithRedux";
 
-type TypeProps = {
-    title: string
-    taska: TasksArr[]
-    delTask: (id: string, tlId: string) => void
-    changeFilter: (value: FilteredTask, todoListId: string) => void
-    addTask: (value: string, tlId: string) => void
-    changeStatus: (id: string, isDone: boolean, tlId: string) => void
-    changeTaskTitle: (id: string, newTitle:string, tlId: string) => void
-    filterTasks: FilteredTask
+type PropsType = {
     tlId: string
-    removeTodoList: (tlId:string) => void
-    changeTodoListTitle: (tlId:string, title:string) => void
+    title: string
+    // taska: TasksArr[]
+    changeFilter: (value: FilteredTask, todoListId: string) => void
+    removeTodoList: (tlId: string) => void
+    changeTodoListTitle: (tlId: string, title: string) => void
+    filterTasks: FilteredTask
+    // changeTaskTitle: (taskId: string, newTitle: string, tlId: string) => void
 }
 export type TasksArr = {
     id: string
@@ -26,8 +27,20 @@ export type TasksArr = {
 }
 
 
-export function Todolist(props: TypeProps) {
+export function Todolist(props: PropsType) {
+    const dispatch = useDispatch()
+    const tasksObj = useSelector<AppRootState, Array<TasksArr>>(state => state.tasksObj[props.tlId])
 
+    // function changeTaskTitle(id: string, newTitle: string, tlId: string) {
+    //     dispatch(changeTaskTitleAC(id, newTitle, tlId))
+    // }
+
+    const removeTodoList = () => {
+        props.removeTodoList(props.tlId)
+    }
+    const changeTodoListTitle = (title: string) => {
+        props.changeTodoListTitle(props.tlId, title)
+    }
     const onAllHandler = () => {
         props.changeFilter('All', props.tlId)
     }
@@ -37,52 +50,50 @@ export function Todolist(props: TypeProps) {
     const onActiveHandler = () => {
         props.changeFilter('Active', props.tlId)
     }
-    const removeTodoList = () => {
-        props.removeTodoList(props.tlId)
-    }
-    const addTask = (title: string) => {
-        props.addTask(title, props.tlId)
-    }
-    const changeTodoListTitle = (title:string) => {
-        props.changeTodoListTitle(props.tlId, title)
-    }
 
+
+        let allTodolistTasks = tasksObj;
+        let tasksForTodolist = allTodolistTasks
+
+        if (props.filterTasks === 'Completed') {
+            tasksForTodolist = allTodolistTasks.filter(t => t.isDone === false)
+        }
+        if (props.filterTasks === 'Active') {
+            tasksForTodolist = allTodolistTasks.filter(t => t.isDone === true)
     return (
         <div>
             <div>
-
                 <h3><EditableSpan
                     title={props.title}
                     onChange={changeTodoListTitle}/>
-                    <IconButton onClick={removeTodoList}><Delete /></IconButton></h3>
-                <AddItemForm addItem={addTask}
-                    // tlId={props.tlId}
-                />
+                    <IconButton onClick={removeTodoList}><Delete/></IconButton></h3>
+                <AddItemForm addItem={(title) => {
+                    dispatch(addTaskAC(title, props.tlId))
+                }}/>
             </div>
 
             <ul>
                 {
-                    props.taska.map(t => {
-                        const onChangeTitleHandler = (newValue:string) => {
-                            props.changeTaskTitle(t.id, newValue, props.tlId)
+                    tasksForTodolist.map(t => {
+                        const onClickHandler = () => dispatch(removeTaskAC(t.id, props.tlId))
+                        const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+                            let newIsDoneValue = e.currentTarget.checked;
+                            dispatch(changeTaskStatusAC(t.id, newIsDoneValue, props.tlId))
                         }
-                        return (     <li key={t.id}>
+                        const onChangeTitleHandler = (newValue: string) => {
+                            changeTaskTitleAC(t.id, newValue, props.tlId)
+                        }
+                        return (<li key={t.id}>
                             <Checkbox
-                                // type='checkbox'
                                 checked={t.isDone}
-                                onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                                    props.changeStatus(t.id, e.currentTarget.checked, props.tlId)
-                                }
-                                }
+                                onChange={onChangeHandler}
                             />
                             <EditableSpan
                                 title={t.title}
                                 onChange={onChangeTitleHandler}
                             ></EditableSpan>
-
-                            <IconButton onClick ={() => {
-                                props.delTask(t.id, props.tlId)
-                            }}arial-label='delete'><Delete /></IconButton>
+                            <IconButton onClick={onClickHandler}
+                                        arial-label='delete'><Delete/></IconButton>
                         </li>)
                     })
                 }
@@ -111,18 +122,6 @@ export function Todolist(props: TypeProps) {
         </div>
     )
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // import React, {ChangeEvent} from "react";
@@ -238,19 +237,6 @@ export function Todolist(props: TypeProps) {
 //         </div>
 //     )
 // }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /////////////////////////////////////////////Todolist 8
@@ -369,8 +355,6 @@ export function Todolist(props: TypeProps) {
 // }
 
 
-
-
 ////////////////////////////////////////////////Task 7
 // import React, {ChangeEvent} from "react";
 // import {FilteredTask} from "./App";
@@ -487,55 +471,6 @@ export function Todolist(props: TypeProps) {
 // }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ///////////////////////////////////////////////////////////////Task 6 30 min
 // import React, {ChangeEvent, useState, KeyboardEvent} from "react";
 // import {FilteredTask} from "./App";
@@ -628,7 +563,6 @@ export function Todolist(props: TypeProps) {
 // }
 
 
-
 // type addItemFormtype = {
 //         addTask: (newValue: string, tlId: string) => void
 //         tlId: string
@@ -672,23 +606,6 @@ export function Todolist(props: TypeProps) {
 //     </div>
 //         )
 // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ////////////////////////////////////////////// TASK 6
@@ -799,15 +716,6 @@ export function Todolist(props: TypeProps) {
 //         </div>
 //     )
 // }
-
-
-
-
-
-
-
-
-
 
 
 //////////////////////////////////////////////////////////////////////// Task 5 refactor
