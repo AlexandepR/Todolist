@@ -106,9 +106,6 @@ export const changeTaskTitleAC = (taskId: string, title: string, todolistId: str
 
 
 
-
-
-
 ///////////////////////////////////////////////////////todolist 8
 // import {FilteredTask, TodoListsType} from "../App";
 // import {v1} from "uuid";
