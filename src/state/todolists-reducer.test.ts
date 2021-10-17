@@ -4,7 +4,6 @@ import {
     todolistsReducer
 } from "./todolists-reducer";
 import {FilteredTask, TodoListsType,} from '../App';
-import {start} from "repl";
 
 
 test('correct todolist should be removed', () => {
@@ -38,7 +37,7 @@ test('correct todoList should be added', () => {
 
     const endState = todolistsReducer(startState, addTodolistAC(newTodolistTitle))
 
-    expect(endState[2].title).toBe(newTodolistTitle);
+    expect(endState[0].title).toBe(newTodolistTitle);
     expect(endState.length).toBe(3)
     expect(endState[2].filter).toBe('All')
 })

@@ -158,9 +158,9 @@ function App() {
                                         <Todolist
                                             key={tl.id}
                                             tlId={tl.id}
-                                            changeChecked={changeChecked}
+                                            changeStatus={changeChecked}
                                             addTask={addTask}
-                                            changeTask={changeTask}
+                                            changeFilter={changeTask}
                                             delTask={delTask}
                                             title={tl.title}
                                             taska={tasksForTodolist}
