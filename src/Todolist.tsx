@@ -1,5 +1,5 @@
 import React, {ChangeEvent} from "react";
-import {FilteredTask, TodoListsType} from "./App";
+import {FilteredTask, TodoListsType} from "../src/AppWithRedux";
 import './App.css'
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
@@ -52,76 +52,77 @@ export function Todolist(props: PropsType) {
     }
 
 
-        let allTodolistTasks = tasksObj;
-        let tasksForTodolist = allTodolistTasks
+    let allTodolistTasks = tasksObj;
+    let tasksForTodolist = allTodolistTasks;
 
-        if (props.filterTasks === 'Completed') {
-            tasksForTodolist = allTodolistTasks.filter(t => t.isDone === false)
-        }
-        if (props.filterTasks === 'Active') {
-            tasksForTodolist = allTodolistTasks.filter(t => t.isDone === true)
-    return (
-        <div>
+    if (props.filterTasks === 'Completed') {
+        tasksForTodolist = allTodolistTasks.filter(t => t.isDone === false)
+    }
+    if (props.filterTasks === 'Active') {
+        tasksForTodolist = allTodolistTasks.filter(t => t.isDone === true)
+    }
+        return (
             <div>
-                <h3><EditableSpan
-                    title={props.title}
-                    onChange={changeTodoListTitle}/>
-                    <IconButton onClick={removeTodoList}><Delete/></IconButton></h3>
-                <AddItemForm addItem={(title) => {
-                    dispatch(addTaskAC(title, props.tlId))
-                }}/>
-            </div>
+                <div>
+                    <h3><EditableSpan
+                        title={props.title}
+                        onChange={changeTodoListTitle}/>
+                        <IconButton onClick={removeTodoList}><Delete/></IconButton></h3>
+                    <AddItemForm addItem={(title) => {
+                        dispatch(addTaskAC(title, props.tlId))
+                    }}/>
+                </div>
 
-            <ul>
-                {
-                    tasksForTodolist.map(t => {
-                        const onClickHandler = () => dispatch(removeTaskAC(t.id, props.tlId))
-                        const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-                            let newIsDoneValue = e.currentTarget.checked;
-                            dispatch(changeTaskStatusAC(t.id, newIsDoneValue, props.tlId))
-                        }
-                        const onChangeTitleHandler = (newValue: string) => {
-                            changeTaskTitleAC(t.id, newValue, props.tlId)
-                        }
-                        return (<li key={t.id}>
-                            <Checkbox
-                                checked={t.isDone}
-                                onChange={onChangeHandler}
-                            />
-                            <EditableSpan
-                                title={t.title}
-                                onChange={onChangeTitleHandler}
-                            ></EditableSpan>
-                            <IconButton onClick={onClickHandler}
-                                        arial-label='delete'><Delete/></IconButton>
-                        </li>)
-                    })
-                }
-            </ul>
-            <div>
-                <Button
-                    variant={props.filterTasks === 'All' ? 'contained' : 'text'}
-                    // className={props.filterTasks === 'All' ? 'active-filter' : ''}
-                    onClick={onAllHandler}>All
-                </Button>
-                <Button
-                    color={'primary'}
-                    // className={props.filterTasks === 'Completed' ? 'active-filter' : ''}
-                    variant={props.filterTasks === 'Completed' ? 'contained' : 'text'}
-                    onClick={onCompletedHandler}>Complete
-                </Button>
-                <Button
-                    color={'secondary'}
-                    // className={props.filterTasks === 'Active' ? 'active-filter' : ''}
-                    variant={props.filterTasks === 'Active' ? 'contained' : 'text'}
-                    onClick={
-                        onActiveHandler
-                    }>Active
-                </Button>
+                <ul>
+                    {
+                        tasksForTodolist.map(t => {
+                            const onClickHandler = () => dispatch(removeTaskAC(t.id, props.tlId))
+                            const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+                                let newIsDoneValue = e.currentTarget.checked;
+                                dispatch(changeTaskStatusAC(t.id, newIsDoneValue, props.tlId))
+                            }
+                            const onChangeTitleHandler = (newValue: string) => {
+                                changeTaskTitleAC(t.id, newValue, props.tlId)
+                            }
+                            return (<li key={t.id}>
+                                <Checkbox
+                                    checked={t.isDone}
+                                    onChange={onChangeHandler}
+                                />
+                                <EditableSpan
+                                    title={t.title}
+                                    onChange={onChangeTitleHandler}
+                                ></EditableSpan>
+                                <IconButton onClick={onClickHandler}
+                                            arial-label='delete'><Delete/></IconButton>
+                            </li>)
+                        })
+                    }
+                </ul>
+                <div>
+                    <Button
+                        variant={props.filterTasks === 'All' ? 'contained' : 'text'}
+                        // className={props.filterTasks === 'All' ? 'active-filter' : ''}
+                        onClick={onAllHandler}>All
+                    </Button>
+                    <Button
+                        color={'primary'}
+                        // className={props.filterTasks === 'Completed' ? 'active-filter' : ''}
+                        variant={props.filterTasks === 'Completed' ? 'contained' : 'text'}
+                        onClick={onCompletedHandler}>Complete
+                    </Button>
+                    <Button
+                        color={'secondary'}
+                        // className={props.filterTasks === 'Active' ? 'active-filter' : ''}
+                        variant={props.filterTasks === 'Active' ? 'contained' : 'text'}
+                        onClick={
+                            onActiveHandler
+                        }>Active
+                    </Button>
+                </div>
             </div>
-        </div>
-    )
-}
+        )
+    }
 
 
 // import React, {ChangeEvent} from "react";
