@@ -8,17 +8,16 @@ import {Delete} from "@material-ui/icons";
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "./state/tasks-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootState} from "./state/store";
-import {TasksStateType} from "./AppWithRedux";
+
 
 type PropsType = {
     tlId: string
     title: string
-    // taska: TasksArr[]
+
     changeFilter: (value: FilteredTask, todoListId: string) => void
     removeTodoList: (tlId: string) => void
     changeTodoListTitle: (tlId: string, title: string) => void
     filterTasks: FilteredTask
-    // changeTaskTitle: (taskId: string, newTitle: string, tlId: string) => void
 }
 export type TasksArr = {
     id: string
