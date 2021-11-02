@@ -1,5 +1,5 @@
 import React, {useCallback} from "react";
-import {TasksArr, Todolist} from './Todolist'
+import {TaskType, Todolist} from './Todolist'
 import {AddItemForm} from "./AddItemForm";
 import {
     AppBar,
@@ -33,31 +33,51 @@ export type TodoListsType = {
 }
 
 export type TasksStateType = {
-    [key: string]: Array<TasksArr>
+    [key: string]: Array<TaskType>
 }
 
 function AppWithRedux() {
 
     const dispatch = useDispatch()
     const todolists = useSelector<AppRootState, Array<TodoListsType>> (state => state.todolists)
+    const tasksObj = useSelector<AppRootState, TasksStateType>(state => state.tasksObj)
+
+    const removeTask = useCallback(function (id: string, todolistId: string) {
+        const action = removeTaskAC(id, todolistId);
+        dispatch(action);
+    }, [dispatch]);
+
+    const addTask = useCallback(function (title: string, todolistId: string) {
+        const action = addTaskAC(title, todolistId);
+        dispatch(action);
+    }, [dispatch]);
+
+    const changeStatus = useCallback(function (id: string, isDone: boolean, todolistId: string) {
+        const action = changeTaskStatusAC(id, isDone, todolistId);
+        dispatch(action);
+    }, [dispatch]);
+
+    const changeTaskTitle = useCallback(function (id: string, newTitle: string, todolistId: string) {
+        const action = changeTaskTitleAC(id, newTitle, todolistId);
+        dispatch(action);
+    }, [dispatch]);
 
 
-
-    function changeFilter(value: FilteredTask, todoListId: string) {
+    const changeFilter = useCallback ((value: FilteredTask, todoListId: string) => {
         dispatch(filterTodoListAC(todoListId, value))
-    }
+    },[dispatch])
 
-    function removeTodoList(id: string) {
+    const removeTodoList = useCallback ((id: string) => {
         dispatch(removeTodolistAC(id))
-    }
+    },[dispatch])
 
     const addTodolist = useCallback ((title: string) => {
         dispatch(addTodolistAC(title))
-    },[])
+    },[dispatch])
 
-    function changeTodoListTitle(tlId: string, title: string) {
+    const changeTodoListTitle = useCallback((tlId: string, title: string) => {
         dispatch(changeTodolistAC(tlId, title))
-    }
+    },[dispatch])
 
     return (
         <div className='App'>
@@ -79,16 +99,30 @@ function AppWithRedux() {
                 <Grid container spacing={5}>
                     {
                         todolists.map(tl => {
+                            let allTodolistTasks = tasksObj[tl.id];
+                            let tasksForTodolist = allTodolistTasks;
                             return (
                                 <Grid item>
                                     <Paper style={{padding: '20px'}} elevation={7}>
                                         <Todolist
+                                            // key={tl.id}
+                                            // tlId={tl.id}
+                                            // changeFilter={changeFilter}
+                                            // title={tl.title}
+                                            // filterTasks={tl.filter}
+                                            // removeTodoList={removeTodoList}
+                                            // changeTodoListTitle={changeTodoListTitle}
                                             key={tl.id}
                                             tlId={tl.id}
+                                            changeTaskStatus={changeStatus}
+                                            addTask={addTask}
                                             changeFilter={changeFilter}
+                                            removeTask={removeTask}
                                             title={tl.title}
+                                            tasks={tasksForTodolist}
                                             filterTasks={tl.filter}
                                             removeTodoList={removeTodoList}
+                                            changeTaskTitle={changeTaskTitle}
                                             changeTodoListTitle={changeTodoListTitle}
                                         />
                                     </Paper>

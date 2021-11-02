@@ -7,7 +7,7 @@ type EditableSpanType = {
 }
 
 
-export function EditableSpan(props: EditableSpanType) {
+export const EditableSpan = React.memo ((props: EditableSpanType) => {
     let [editMode, setEditMode] = useState(false)
     let [title, setTitle] = useState('')
 
@@ -34,4 +34,4 @@ export function EditableSpan(props: EditableSpanType) {
 
             >--{props.title}--</span>
     )
-}
+})

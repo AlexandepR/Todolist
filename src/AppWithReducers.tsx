@@ -1,6 +1,6 @@
 import React, {useReducer, useState} from "react";
 import {v1} from "uuid";
-import {TasksArr, Todolist} from './Todolist'
+import {TaskType, Todolist} from './Todolist'
 import {AddItemForm} from "./AddItemForm";
 import {
     AppBar,
@@ -32,11 +32,10 @@ export type TodoListsType = {
 }
 
 export type TasksStateType = {
-    [key: string]: Array<TasksArr>
+    [key: string]: Array<TaskType>
 }
 
 function AppWithReducers() {
-
 
     const todoList1 = v1()
     const todoList2 = v1()
@@ -133,15 +132,15 @@ function AppWithReducers() {
                                         <Todolist
                                             key={tl.id}
                                             tlId={tl.id}
-                                            // changeStatus={changeStatus}
-                                            // addTask={addTask}
+                                            changeTaskStatus={changeStatus}
+                                            addTask={addTask}
                                             changeFilter={changeFilter}
-                                            // delTask={delTask}
+                                            removeTask={delTask}
                                             title={tl.title}
-                                            // taska={tasksForTodolist}
+                                            tasks={tasksForTodolist}
                                             filterTasks={tl.filter}
                                             removeTodoList={removeTodoList}
-                                            // changeTaskTitle={changeTaskTitle}
+                                            changeTaskTitle={changeTaskTitle}
                                             changeTodoListTitle={changeTodoListTitle}
                                         />
                                     </Paper>
