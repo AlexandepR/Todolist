@@ -7,7 +7,7 @@ type AddItemFormType = {
     // tlId: string
 }
 
-export function AddItemForm(props: AddItemFormType) {
+export const AddItemForm = React.memo ((props: AddItemFormType) => {
     let [error, setError] = useState<null | string>(null)
     let [newValue, setNewValue] = useState('')
 
@@ -16,7 +16,9 @@ export function AddItemForm(props: AddItemFormType) {
         setError(null)
     }
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        setError(null);
+        if (error !== null) {
+        setError(null)
+        };
         if (e.charCode === 13 && e.ctrlKey) {
             props.addItem(newValue);
             setNewValue('')
@@ -75,7 +77,7 @@ export function AddItemForm(props: AddItemFormType) {
 
         </div>
     )
-}
+})
 
 
 
